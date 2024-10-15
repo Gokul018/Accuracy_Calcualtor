@@ -69,4 +69,4 @@ with col1:
 
 # Display an image in the second column
 with col2:
-    st.image("./images/CM.png", caption="Your Image Caption", width=500)  # Adjust the width as needed
+    st.image("./images/CM.png", caption="Confusion Matrix", width=500)  # Adjust the width as needed
