@@ -1,0 +1,72 @@
+import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Function to calculate sensitivity and specificity
+def calculate_sensitivity_specificity(tp, fn, tn, fp):
+    sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+    return sensitivity, specificity
+
+# Function to plot confusion matrix
+def plot_confusion_matrix(tp, fn, tn, fp):
+    # Create confusion matrix array
+    confusion_matrix = np.array([[tp, fn],
+                                  [fp, tn]])
+    
+    fig, ax = plt.subplots()
+    
+    # Create a heatmap for the confusion matrix
+    cax = ax.matshow(confusion_matrix, cmap='Blues')
+
+    # Set the colors for TP and TN
+    ax.text(0, 0, tp, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))
+    ax.text(0, 1, fn, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))
+    ax.text(1, 0, fp, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))
+    ax.text(1, 1, tn, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))
+
+    # Set ticks and labels
+    ax.set_xticks(np.arange(2))
+    ax.set_yticks(np.arange(2))
+    ax.set_xticklabels(['Predicted Positive', 'Predicted Negative'])
+    ax.set_yticklabels(['Actual Positive', 'Actual Negative'])
+
+    ax.set_title('Confusion Matrix')
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
+    st.pyplot(fig)
+
+# Streamlit app
+st.title("Sensitivity and Specificity Calculator")
+
+st.write("""
+This app calculates the sensitivity and specificity based on the following inputs:
+- True Positives (TP)
+- False Negatives (FN)
+- True Negatives (TN)
+- False Positives (FP)
+""")
+
+# Create a two-column layout
+col1, col2 = st.columns([2, 1])
+
+# Input fields in the first column
+with col1:
+    tp = st.number_input("True Positives (TP)", min_value=0, step=1)
+    fn = st.number_input("False Negatives (FN)", min_value=0, step=1)
+    tn = st.number_input("True Negatives (TN)", min_value=0, step=1)
+    fp = st.number_input("False Positives (FP)", min_value=0, step=1)
+
+    # Button to calculate sensitivity and specificity
+    if st.button("Calculate"):
+        sensitivity, specificity = calculate_sensitivity_specificity(tp, fn, tn, fp)
+        
+        st.write(f"Sensitivity: {sensitivity:.2f}")
+        st.write(f"Specificity: {specificity:.2f}")
+        
+        # Plot confusion matrix
+        plot_confusion_matrix(tp, fn, tn, fp)
+
+# Display an image in the second column
+with col2:
+    st.image("./images/CM.png", caption="Your Image Caption", width=500)  # Adjust the width as needed
