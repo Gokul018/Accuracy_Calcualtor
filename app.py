@@ -29,8 +29,8 @@ def plot_confusion_matrix(tp, fn, tn, fp):
 
     # Set the colors for TP and TN
     ax.text(0, 0, tp, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))  # TP
-    ax.text(0, 1, fn, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))  # FN
-    ax.text(1, 0, fp, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))  # FP
+    ax.text(1, 0, fn, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))  # FN
+    ax.text(0, 1, fp, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))  # FP
     ax.text(1, 1, tn, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))  # TN
     ax.text(2, 0, total_positives, ha='center', va='center', color='black', fontsize=12, bbox=dict(facecolor='lightgrey', alpha=0.5))  # Total Positives
     ax.text(2, 1, total_negatives, ha='center', va='center', color='black', fontsize=12, bbox=dict(facecolor='lightgrey', alpha=0.5))  # Total Negatives
