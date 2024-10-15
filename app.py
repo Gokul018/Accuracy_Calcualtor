@@ -15,8 +15,8 @@ def plot_confusion_matrix(tp, fn, tn, fp):
                                   [fp, tn]])
     
     # Calculate totals for each row
-    total_positives = tp + fp  # Total actual positives
-    total_negatives = tn + fn  # Total actual negatives
+    total_positives = tp + fn  # Total actual positives
+    total_negatives = tn + fp  # Total actual negatives
 
     # Add totals to the confusion matrix
     total_row = np.array([[total_positives], [total_negatives]])
