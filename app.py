@@ -4,8 +4,8 @@ import numpy as np
 
 # Function to calculate sensitivity and specificity
 def calculate_sensitivity_specificity(tp, fn, tn, fp):
-    sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0
-    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+    sensitivity = (tp / (tp + fn))*100 if (tp + fn) > 0 else 0
+    specificity = (tn / (tn + fp))*100 if (tn + fp) > 0 else 0
     return sensitivity, specificity
 
 # Function to plot confusion matrix
@@ -20,10 +20,10 @@ def plot_confusion_matrix(tp, fn, tn, fp):
     cax = ax.matshow(confusion_matrix, cmap='Blues')
 
     # Set the colors for TP and TN
-    ax.text(0, 0, tp, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))
-    ax.text(0, 1, fn, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))
-    ax.text(1, 0, fp, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))
-    ax.text(1, 1, tn, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))
+    ax.text(0, 0, tp, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))  # TP
+    ax.text(1, 0, fn, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))  # FN
+    ax.text(0, 1, fp, ha='center', va='center', color='black', bbox=dict(facecolor='lightcoral', alpha=0.5))  # FP
+    ax.text(1, 1, tn, ha='center', va='center', color='black', bbox=dict(facecolor='lightgreen', alpha=0.5))  # TN
 
     # Set ticks and labels
     ax.set_xticks(np.arange(2))
